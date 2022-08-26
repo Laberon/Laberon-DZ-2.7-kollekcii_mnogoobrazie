@@ -8,6 +8,10 @@ public class Employee {
 
     private Set<String> middleName;
 
+    public String getFullName() {
+        return firstName+" "+lastName;
+    }
+
     public Set<String> getMiddleName() {
         return middleName;
     }
@@ -16,10 +20,10 @@ public class Employee {
         middleName = middleName;
     }
 
-    public Employee(String firstName, String lastName,String middleNames) {
+    public Employee(String firstName, String lastName) {//String middleName
         this.firstName = firstName;
         this.lastName = lastName;
-        this.middleName = new HashSet<>(List.of(middleNames));
+//        this.middleName = new HashSet<>(List.of(middleNames));
     }
 
     public String getFirstName() {

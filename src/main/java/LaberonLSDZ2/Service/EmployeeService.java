@@ -11,22 +11,35 @@ import java.util.*;
 public class EmployeeService {
     private static final Map<String, Employee> employeeMap = new HashMap<>(5);
 
-    public static Employee addPerson(String firstName, String lastName, String middleName) {
-        Employee employee = new Employee(firstName, lastName,middleName);
-        for (Employee employee1 : employeeMap.values()) {
-        }
-        return employeeMap.put(middleName, employee);
+    public static Employee addPerson(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName);//,middleName
+        if(employeeMap.containsKey(employee.getFullName())){
+        throw new EmployeeAlreadyAddedException("Message");}
+//        for (Employee employee1 : employeeMap.values()) {
+//        }
+//        return employeeMap.put(middleName, employee);
+        employeeMap.put(employee.getFullName(), employee);
+        return employee;
     }
 
-    public static Employee findPerson(String firstName, String lastName,String middleName){
-        Employee employee = new Employee(firstName, lastName,middleName);
-        for (Employee employee1:employeeMap.values()) {
+    public static Employee findPerson(String firstName, String lastName){
+        Employee employee = new Employee(firstName, lastName);//,middleName
+        if (employeeMap.containsKey(employee.getFullName())) {
+            return employeeMap.get(employee.getFullName());
         }
-        return employeeMap.get(middleName);
+        throw new EmployeeNotFoundException("message");
+//        for (Employee employee1:employeeMap.values()) {
+//        }
+//        return employeeMap.get(middleName);
     }
 
-    public static Employee removePerson(String middleName){
-            return employeeMap.remove(middleName);
+    public static Employee removePerson(String firstName, String lastName){
+        Employee employee = new Employee(firstName, lastName);//,middleName
+        if (employeeMap.containsKey(employee.getFullName())) {
+            return employeeMap.remove(employee.getFullName());
+        }
+//            return employeeMap.remove(middleName);
+        throw new EmployeeNotFoundException("Message");
         }
 
     public static Collection<Employee> getAll() {
